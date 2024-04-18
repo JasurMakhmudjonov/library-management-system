@@ -8,7 +8,7 @@ const app = express();
 app.use(apiRoutes);
 app.use(express.json());
 
-db.sync({ force: true, logging: false})
+db.sync({ alter: true })
   .then(() => {
     console.log("Connected to DB successfully");
 
