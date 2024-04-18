@@ -23,7 +23,24 @@ function getPublishers(req, res) {
   });
 }
 
+/**
+ *
+ * @param {express.Request} req
+ * @param {express.Response} res
+ */
+
+function getPublisher(req, res, next) {
+  return ShowPublisher(req.params.id)
+    .then((publisher) => {
+      res.json({ publisher });
+    })
+    .catch((err) => {
+      next(err);
+    });
+}
+
 module.exports = {
   postPublisher,
   getPublishers,
+  getPublisher,
 };
