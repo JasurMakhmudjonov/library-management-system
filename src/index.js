@@ -6,11 +6,12 @@ const db = require("./db");
 const app = express();
 
 app.use(apiRoutes);
+app.use(express.json());
 
-db.sync({ force: true })
+db.sync({ force: true, logging: false})
   .then(() => {
     console.log("Connected to DB successfully");
-    
+
     app.listen(config.port, () => {
       console.log(`Server is listening on port ${config.port}`);
     });
