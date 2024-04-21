@@ -1,4 +1,6 @@
 const { NotFoundError } = require("../../shared/errors");
+const { User } = require("../../db/models");
+
 
 function showUser() {
   return User.findByPk(id).then((user) => {

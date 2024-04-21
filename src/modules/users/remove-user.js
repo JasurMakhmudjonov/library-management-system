@@ -1,7 +1,7 @@
 const { User } = require("../../db/models");
 const { NotFoundError } = require("../../shared/errors");
 
-function editUser(id, data) {
+function removeUser(id, data) {
   return User.findByPk(id).then((user) => {
     if (!user) {
       throw new NotFoundError("User is not found");
@@ -13,4 +13,4 @@ function editUser(id, data) {
   });
 }
 
-module.exports = editUser;
+module.exports = removeUser;
