@@ -1,7 +1,13 @@
 const Joi = require("joi");
 
+exports.postPublisherSchema = {
+  body: Joi.object({
+    name: Joi.string().trim().not().empty().required(),
+  }),
+};
+
 exports.getPublishersSchema = {
-    //body : {},
+  //body : {},
   query: Joi.object({
     //sorting
     q: Joi.string().min(1),
@@ -12,4 +18,10 @@ exports.getPublishersSchema = {
     limit: Joi.number().integer().min(1),
   }),
   // params: {},
+};
+
+exports.patchPublisherSchema = {
+  body: Joi.object({
+    name: Joi.string().trim().not().empty(),
+  }),
 };

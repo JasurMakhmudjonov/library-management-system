@@ -1,6 +1,7 @@
 const express = require("express");
 const addPublisher = require("./add-publisher");
 const listPublishers = require("./list-publishers");
+const editPublisher = require("./edit-publisher");
 /**
  *
  * @param {express.Request} req
@@ -27,6 +28,7 @@ function getPublishers(req, res) {
  *
  * @param {express.Request} req
  * @param {express.Response} res
+ *  @param {express.NextFunction} next
  */
 
 function getPublisher(req, res, next) {
@@ -39,8 +41,21 @@ function getPublisher(req, res, next) {
     });
 }
 
+/**
+ *
+ * @param {express.Request} req
+ * @param {express.Response} res
+ */
+
+function patchPublisher(req, res, next) {
+  return editPublisher(req.body).then((publisher) => {
+    res._final.json({ publisher });
+  });
+}
+
 module.exports = {
   postPublisher,
   getPublishers,
   getPublisher,
+  patchPublisher,
 };

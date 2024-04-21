@@ -6,8 +6,8 @@ function showPublisher() {
             throw new NotFoundError("Publisher is not found")
         }
         return publisher;
-
     })
 }
 
 module.exports = showPublisher;
+
