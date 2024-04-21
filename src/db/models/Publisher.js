@@ -1,10 +1,10 @@
-const  db  = require("..");
+const db = require("..");
 const { DataTypes } = require("sequelize");
 
-// console.log(DataTypes);
+
 
 const Publisher = db.define(
-  "Publisher",
+  "publisher",
   {
     id: {
       type: DataTypes.INTEGER,

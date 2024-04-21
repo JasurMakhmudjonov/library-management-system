@@ -2,7 +2,7 @@ const { DataTypes } = require("sequelize");
 const db = require("..");
 
 const Author = db.define(
-    "Author",
+    "author",
     {
         id: {
             type: DataTypes.INTEGER,

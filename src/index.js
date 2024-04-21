@@ -5,8 +5,8 @@ const db = require("./db");
 
 const app = express();
 
-app.use(apiRoutes);
 app.use(express.json());
+app.use(apiRoutes);
 
 db.sync({ alter: true })
   .then(() => {
