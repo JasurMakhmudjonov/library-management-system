@@ -3,7 +3,7 @@ const db = require("..");
 const Publisher = require("./Publisher")
 
 const Book = db.define(
-  "book",
+  "Book",
   {
     id: {
       type: DataTypes.INTEGER,

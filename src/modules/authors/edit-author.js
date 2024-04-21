@@ -15,5 +15,3 @@ function editAuthor(id, data) {
 
 module.exports = editAuthor;
 
-
-module.exports = editAuthor;
