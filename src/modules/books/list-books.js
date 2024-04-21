@@ -8,7 +8,7 @@ function listBooks({
   offset = 0,
   limit = 20,
 }) {
-  Book.findAndCountAll({
+  return Book.findAndCountAll({
     where: {
       title: {
         [Op.iLike]: `%${q}%`,

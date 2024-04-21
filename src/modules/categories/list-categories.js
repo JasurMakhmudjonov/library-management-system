@@ -1,8 +1,8 @@
 const { Op } = require("sequelize");
-const Category = require("../../db/models/Category");
+const { Category } = require("../../db/models");
 
 function listCategories({
-  q,
+  q = "",
   sortBy = "createdAt",
   order = "DESC",
   offset = 0,
@@ -14,9 +14,10 @@ function listCategories({
         [Op.iLike]: `%${q}%`,
       },
     },
-    order: [[sortBy, order]],
     offset,
     limit,
+    order: [[sortBy, order]],
+    include: [Category]
   }).then(({ count, rows }) => {
     return {
       categories: rows,
