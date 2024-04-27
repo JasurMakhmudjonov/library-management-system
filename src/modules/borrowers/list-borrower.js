@@ -2,7 +2,7 @@ const { Borrower } = require("../../db/models");
 const { Op } = require("sequelize");
 
 function listBorrowers({
-  q,
+  q="",
   sortBy = "firstName",
   order = "DESC",
   offset = 0,

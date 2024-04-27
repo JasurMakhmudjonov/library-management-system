@@ -1,6 +1,8 @@
 const { DataTypes } = require("sequelize");
 const db = require("..");
-const Publisher = require("./Publisher")
+const Publisher = require("./Publisher");
+const Category = require("./Category");
+const Author = require("./Author");
 
 const Book = db.define(
   "Book",
@@ -33,7 +35,7 @@ const Book = db.define(
     },
     translated: {
       type: DataTypes.BOOLEAN,
-      allowNull: false,
+      allowNull: true,
     },
     prevLang: {
       type: DataTypes.STRING(150),
@@ -50,7 +52,13 @@ const Book = db.define(
   }
 );
 
-Publisher.hasMany(Book, { foreignKey: "publishedId" });
-Book.belongsTo(Publisher, { foreignKey: "publishedId" });
+Publisher.hasMany(Book, { foreignKey: "publisherId" });
+Book.belongsTo(Publisher, { foreignKey: "publisherId" });
+
+Category.hasMany(Book, { foreignKey: "categoryId" });
+Book.belongsTo(Category, { foreignKey: "categoryId" });
+
+Book.belongsToMany(Author, { through: "books_authors" });
+Author.belongsToMany(Book, { through: "books_authors" });
 
 module.exports = Book;

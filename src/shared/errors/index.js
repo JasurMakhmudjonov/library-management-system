@@ -4,6 +4,13 @@ class NotFoundError extends Error {
   }
 }
 
-module.exports = {
-    NotFoundError,
+class BadRequestError extends Error {
+  constructor(msg) {
+    super(msg);
+  }
 }
+
+module.exports = {
+  NotFoundError,
+  BadRequestError,
+};

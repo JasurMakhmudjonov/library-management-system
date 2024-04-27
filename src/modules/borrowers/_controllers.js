@@ -42,8 +42,52 @@ function getBorrower(req, res, next) {
     });
 }
 
+/**
+ * 
+* @param {express.Request} req
+ * @param {express.Response} res
+ * @param {express.NextFunction} next
+ */
+
+function patchBorrower(req, res, next) {
+  return editBorrower(req.params.id, req.body)
+    .then((borrower) => {
+      if (!borrower) {
+        res.status(404).json({ error: "Borrower is not found" });
+      } else {
+        res.json(borrower);
+      }
+    })
+    .catch((err) => {
+      next(err);
+    });
+}
+ 
+/**
+ * 
+* @param {express.Request} req
+ * @param {express.Response} res
+ * @param {express.NextFunction} next
+ */
+
+function deleteBorrower(req, res, next) {
+  return removeBorrower(req.params.id)
+    .then((borrower) => {
+      if (!borrower) {
+        res.status(404).json({ error: "Borrower is not found" });
+      } else {
+        res.json(borrower);
+      }
+    })
+    .catch((err) => {
+      next(err);
+    });
+}
+
 module.exports = {
   postBorrower,
   getBorrowers,
   getBorrower,
+  patchBorrower,
+  deleteBorrower,
 };

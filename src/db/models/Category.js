@@ -1,33 +1,26 @@
-const { Op } = require("sequelize");
-const { Category } = require("../../db/models");
+const { DataTypes } = require("sequelize");
+const db = require("..");
 
-function listCategories({
-  q = "",
-  sortBy = "createdAt",
-  order = "DESC",
-  offset = 0,
-  limit = 5,
-} = {}) {
-  return Category.findAndCountAll({
-    where: {
-      name: {
-        [Op.iLike]: `%${q}%`,
-      },
+const Category = db.define(
+  "category",
+  {
+    id: {
+      type: DataTypes.INTEGER,
+      autoIncrement: true,
+      primaryKey: true,
     },
-    offset,
-    limit,
-    order: [[sortBy, order]],
-    include: [{ model: Category, as: 'children' }] 
-  }).then(({ count, rows }) => {
-    return {
-      categories: rows,
-      meta: {
-        total: count,
-        offset,
-        limit,
-      },
-    };
-  });
-}
+    name: {
+      type: DataTypes.STRING(150),
+      allowNull: false,
+    },
+  },
+  {
+    tableName: "categories",
+    timestamps: true,
+  }
+);
 
-module.exports = listCategories;
+Category.hasMany(Category, { foreignKey: "parentId" });
+Category.belongsTo(Category, { foreignKey: "parentId" });
+
+module.exports = Category;

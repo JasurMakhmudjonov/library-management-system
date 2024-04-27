@@ -2,7 +2,7 @@ const { Publisher } = require("../../db/models");
 const { Op } = require("sequelize");
 
 function listPublishers({
-  q,
+  q="",
   sortBy = "createdAt",
   order = "DESC",
   offset = 0,

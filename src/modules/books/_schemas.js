@@ -10,7 +10,9 @@ exports.postBookSchema = {
     translated: Joi.boolean(),
     prevLang: Joi.string().trim().not().empty(),
     yearPublished: Joi.number().integer().positive().required(),
-    publishedId: Joi.number().integer().required(),
+    publisherId: Joi.number().integer().required(),
+    categoryId: Joi.number().integer().required(),
+    authorIds: Joi.array().items(Joi.number().integer()).min(1).required(),
   }),
 };
 
@@ -39,6 +41,8 @@ exports.patchBookSchema = {
     translated: Joi.boolean(),
     prevLang: Joi.string().trim().not().empty(),
     yearPublished: Joi.number().integer().positive(),
-    publishedId: Joi.number().integer(),
+    publisherId: Joi.number().integer(),
+    categoryId: Joi.number().integer(),
+    authorIds: Joi.array().items(Joi.number().integer()).min(1),
   }),
 };

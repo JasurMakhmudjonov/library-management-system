@@ -3,7 +3,7 @@ const { Op } = require("sequelize");
 
 function listUsers({
   q,
-  sortBy = "first_name",
+  sortBy = "firstName",
   order = "DESC",
   offset = 0,
   limit = 5,

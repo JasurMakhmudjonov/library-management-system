@@ -1,6 +1,9 @@
 const express = require("express");
 const addAuthor = require("./add-author");
 const listAuthors = require("./list-authors");
+const ShowAuthor = require("./show-author");
+const editAuthor = require("./edit-author");
+const removeAuhor = require("./remove-author");
 
 /**
  *
@@ -26,6 +29,28 @@ function getAuthors(req, res) {
   });
 }
 
+
+/**
+ * 
+ * @param {express.Request} req
+ * @param {express.Response} res
+ * @param {express.NextFunction} next
+ */
+
+function getAuthor(req, res, next) {
+  ShowAuthor(req.params.id)
+    .then((author) => {
+      if (!author) {
+        res.status(404).json({ error: "Author not found" });
+      } else {
+        res.json({ author });
+      }
+    })
+    .catch((err) => {
+      next(err);
+    });
+}
+
 /**
  *
  * @param {express.Request} req
@@ -33,10 +58,35 @@ function getAuthors(req, res) {
  * @param {express.NextFunction} next
  */
 
-function getAuthor(req, res, next) {
-  return ShowAuthor(req.params.id)
+function patchAuthor(req, res, next) {
+  return editAuthor(req.params.id, req.body)
     .then((author) => {
-      res.json({ author });
+      if (!author) {
+        res.status(404).json({ error: "Author is not found" });
+      } else {
+        res.json(author);
+      }
+    })
+    .catch((err) => {
+      next(err);
+    });
+}
+
+/**
+ *
+ * @param {express.Request} req
+ * @param {express.Response} res
+ * @param {express.NextFunction} next
+ */
+
+function deleteAuhor(req, res, next) {
+  return removeAuhor(req.params.id)
+    .then((author) => {
+      if (!author) {
+        res.status(404).json({ error: "Author is not found" });
+      } else {
+        res.json(author);
+      }
     })
     .catch((err) => {
       next(err);
@@ -46,5 +96,7 @@ function getAuthor(req, res, next) {
 module.exports = {
   postAuthor,
   getAuthors,
-  getAuthor
+  getAuthor,
+  patchAuthor,
+  deleteAuhor,
 };

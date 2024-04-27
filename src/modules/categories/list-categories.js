@@ -13,11 +13,12 @@ function listCategories({
       name: {
         [Op.iLike]: `%${q}%`,
       },
+      parentId: null,
     },
+    order: [[sortBy, order]],
     offset,
     limit,
-    order: [[sortBy, order]],
-    include: [Category]
+    include: [ { model: Category } ],
   }).then(({ count, rows }) => {
     return {
       categories: rows,

@@ -1,5 +1,6 @@
 const { Op } = require("sequelize");
 const { Book, Publisher } = require("../../db/models");
+const Category = require("../../db/models/Category");
 
 function listBooks({
   q = "",
@@ -17,7 +18,16 @@ function listBooks({
     limit,
     offset,
     order: [[sortBy, order]],
-    include: [Publisher],
+    include: [
+      {
+        model: Publisher,
+        attributes: ["id", "name"],
+      },
+      {
+        model: Category,
+        attributes: ["id", "name"],
+      },
+    ],
   }).then(({ count, rows }) => {
     return {
       books: rows,

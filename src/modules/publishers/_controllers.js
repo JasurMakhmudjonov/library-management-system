@@ -2,6 +2,8 @@ const express = require("express");
 const addPublisher = require("./add-publisher");
 const listPublishers = require("./list-publishers");
 const editPublisher = require("./edit-publisher");
+const ShowPublisher = require("./show-publisher");
+const removePublisher = require("./remove-publisher");
 /**
  *
  * @param {express.Request} req
@@ -45,12 +47,41 @@ function getPublisher(req, res, next) {
  *
  * @param {express.Request} req
  * @param {express.Response} res
+ * @param {express.NextFunction} next
  */
 
 function patchPublisher(req, res, next) {
-  return editPublisher(req.body).then((publisher) => {
-    res._final.json({ publisher });
-  });
+  const { id } = req.params; 
+  const data = req.body; 
+
+  return editPublisher(id, data) 
+    .then((publisher) => {
+      res.json({ publisher });
+    })
+    .catch((err) => {
+      next(err);
+    });
+}
+
+/**
+ *
+ * @param {express.Request} req
+ * @param {express.Response} res
+ *  @param {express.NextFunction} next
+ */
+
+function deletePublisher(req, res, next) {
+  return removePublisher(req.params.id)
+    .then((publisher) => {
+      if (!publisher) {
+        res.status(404).json({ error: "Publisher is not found" });
+      } else {
+        res.json(publisher);
+      }
+    })
+    .catch((err) => {
+      next(err);
+    });
 }
 
 module.exports = {
@@ -58,4 +89,5 @@ module.exports = {
   getPublishers,
   getPublisher,
   patchPublisher,
+  deletePublisher,
 };

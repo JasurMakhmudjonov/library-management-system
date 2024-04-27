@@ -2,12 +2,12 @@ const { Op } = require("sequelize");
 const { Author } = require("../../db/models");
 
 function listAuthors({
-  q,
+  q ="",
   sortBy = "createdAt",
   order = "DESC",
   offset = 0,
   limit = 5,
-} = {}) {
+}) {
   return Author.findAndCountAll({
     where: {
       name: {
