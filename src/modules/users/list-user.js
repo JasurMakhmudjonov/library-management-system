@@ -2,7 +2,7 @@ const { User } = require("../../db/models");
 const { Op } = require("sequelize");
 
 function listUsers({
-  q,
+  q="",
   sortBy = "firstName",
   order = "DESC",
   offset = 0,

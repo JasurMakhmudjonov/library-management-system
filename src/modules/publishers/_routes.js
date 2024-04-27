@@ -1,15 +1,45 @@
 const express = require("express");
-const { postPublisher, getPublishers, getPublisher, patchPublisher, deletePublisher } = require("./_controllers");
+const {
+  postPublisher,
+  getPublishers,
+  getPublisher,
+  patchPublisher,
+  deletePublisher,
+} = require("./_controllers");
 const validate = require("../../shared/middlewares/validate");
-const { getPublishersSchema, postPublisherSchema, patchPublisherSchema } = require("./_schemas");
-
+const {
+  getPublishersSchema,
+  postPublisherSchema,
+  patchPublisherSchema,
+} = require("./_schemas");
+const isLoggedIn = require("../../shared/middlewares/is-logged-in");
+const hasRole = require("../../shared/middlewares/has-role");
 
 const router = express.Router();
 
-router.post("/publishers", validate(postPublisherSchema), postPublisher);
-router.get("/publishers", validate(getPublishersSchema), getPublishers);
+router.post(
+  "/publishers",
+  isLoggedIn,
+  hasRole("admin"),
+
+  validate(postPublisherSchema),
+  postPublisher
+);
+router.get(
+  "/publishers",
+  isLoggedIn,
+  hasRole("admin"),
+  validate(getPublishersSchema),
+  getPublishers
+);
 router.get("/publishers/:id", getPublisher);
-router.patch("/publishers/:id",validate(patchPublisherSchema), patchPublisher);
-router.delete("/publishers/:id", deletePublisher);
+router.patch(
+  "/publishers/:id",
+  isLoggedIn,
+  hasRole("admin"),
+  validate(patchPublisherSchema),
+  patchPublisher
+);
+router.delete("/publishers/:id", isLoggedIn, hasRole("admin"), deletePublisher);
 
 module.exports = router;

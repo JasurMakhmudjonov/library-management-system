@@ -6,6 +6,7 @@ const userRoutes = require("../modules/users/_routes");
 const bookRoutes = require("../modules/books/_routes");
 const categoryRoutes = require("../modules/categories/_routes");
 const borrowerRoutes = require("../modules/borrowers/_routes");
+const authRoutes = require("../modules/auth/_routes")
 
 
 const router = express.Router();
@@ -17,5 +18,6 @@ router.use(userRoutes);
 router.use(bookRoutes);
 router.use(categoryRoutes);
 router.use(borrowerRoutes);
+router.use(authRoutes);
 
 module.exports = router;

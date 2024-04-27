@@ -10,7 +10,18 @@ class BadRequestError extends Error {
   }
 }
 
+class UnauthorizedError extends Error {
+  constructor(msg) {
+    super(msg);
+  }
+}
+
 module.exports = {
   NotFoundError,
   BadRequestError,
+  UnauthorizedError,
 };
+
+
+
+

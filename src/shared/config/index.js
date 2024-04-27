@@ -9,4 +9,7 @@ module.exports = {
     username: process.env.DB_USER,
     pwd: process.env.DB_PWD,
   },
+  jwt: {
+    secret: process.env.JWT_SECRET,
+  },
 };
