@@ -2,7 +2,7 @@ const { NotFoundError } = require("../../shared/errors");
 const { Borrower } = require("../../db/models");
 
 
-function showBorrower() {
+function showBorrower(id) {
   return Borrower.findByPk(id).then((borrower) => {
     if (!borrower) {
       throw new NotFoundError("Borrower is not found");

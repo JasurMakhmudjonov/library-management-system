@@ -20,7 +20,7 @@ const router = express.Router();
 router.post(
   "/publishers",
   isLoggedIn,
-  hasRole("admin"),
+  hasRole("admin", "superadmin"),
 
   validate(postPublisherSchema),
   postPublisher
@@ -28,7 +28,7 @@ router.post(
 router.get(
   "/publishers",
   isLoggedIn,
-  hasRole("admin"),
+  hasRole("admin", "superadmin"),
   validate(getPublishersSchema),
   getPublishers
 );
@@ -36,10 +36,10 @@ router.get("/publishers/:id", getPublisher);
 router.patch(
   "/publishers/:id",
   isLoggedIn,
-  hasRole("admin"),
+  hasRole("admin", "superadmin"),
   validate(patchPublisherSchema),
   patchPublisher
 );
-router.delete("/publishers/:id", isLoggedIn, hasRole("admin"), deletePublisher);
+router.delete("/publishers/:id", isLoggedIn, hasRole("admin", "superadmin"), deletePublisher);
 
 module.exports = router;

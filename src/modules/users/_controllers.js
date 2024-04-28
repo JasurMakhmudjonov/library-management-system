@@ -1,6 +1,9 @@
 const express = require("express");
 const addUser = require("./add-user");
 const listUsers = require("./list-user");
+const showUser = require("./show-user");
+const editUser = require("./edit-user");
+const removeUser = require("./remove-user")
 
 /**
  *
@@ -38,7 +41,7 @@ function getUsers(req, res) {
  */
 
 function getUser(req, res, next) {
-  return ShowUser(req.params.id)
+  return showUser(req.params.id)
     .then((user) => {
       res.json({ user });
     })

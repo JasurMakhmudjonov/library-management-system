@@ -20,14 +20,14 @@ const router = express.Router();
 router.post(
   "/categories",
   isLoggedIn,
-  hasRole("admin"),
+  hasRole("admin", "superadmin"),
   validate(postCategorychema),
   postCategory
 );
 router.get(
   "/categories",
   isLoggedIn,
-  hasRole("admin"),
+  hasRole("admin", "superadmin"),
   validate(getCategorySchema),
   getCategories
 );
@@ -35,10 +35,10 @@ router.get("/categories/:id", getCategory);
 router.patch(
   "/categories/:id",
   isLoggedIn,
-  hasRole("admin"),
+  hasRole("admin", "superadmin"),
   validate(patchCategorychema),
   patchCategory
 );
-router.delete("/categories/:id", isLoggedIn, hasRole("admin"), deleteCategory);
+router.delete("/categories/:id", isLoggedIn, hasRole("admin", "superadmin"), deleteCategory);
 
 module.exports = router;

@@ -1,5 +1,5 @@
-const Borrower = require("./Borrower");
-const Category = require("./Category");
+
+
 
 module.exports = {
   Publisher: require("./Publisher"),
@@ -8,4 +8,5 @@ module.exports = {
   Book: require("./Book"),
   Category: require("./Category"),
   Borrower: require("./Borrower"),
+  BookCopy: require("./BookCopy")
 };

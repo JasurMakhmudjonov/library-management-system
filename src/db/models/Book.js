@@ -5,7 +5,7 @@ const Category = require("./Category");
 const Author = require("./Author");
 
 const Book = db.define(
-  "Book",
+  "book",
   {
     id: {
       type: DataTypes.INTEGER,
@@ -62,3 +62,5 @@ Book.belongsToMany(Author, { through: "books_authors" });
 Author.belongsToMany(Book, { through: "books_authors" });
 
 module.exports = Book;
+
+

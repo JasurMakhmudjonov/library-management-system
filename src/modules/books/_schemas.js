@@ -13,6 +13,7 @@ exports.postBookSchema = {
     publisherId: Joi.number().integer().required(),
     categoryId: Joi.number().integer().required(),
     authorIds: Joi.array().items(Joi.number().integer()).min(1).required(),
+    countOfCopies: Joi.number().integer().positive().required(),
   }),
 };
 
@@ -26,10 +27,8 @@ exports.getBooksSchema = {
     translated: Joi.boolean(),
     prevLang: Joi.string().trim(),
     yearPublished: Joi.number().integer().positive(),
-    
   }),
 };
-
 
 exports.patchBookSchema = {
   body: Joi.object({

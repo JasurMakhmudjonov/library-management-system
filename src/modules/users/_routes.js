@@ -20,14 +20,13 @@ const router = express.Router();
 router.post(
   "/users",
   isLoggedIn,
-  hasRole("admin"),
   validate(postUserSchema),
   postUser
 );
 router.get(
   "/users",
   isLoggedIn,
-  hasRole("admin"),
+  hasRole("admin", "superadmin"),
   validate(getUsersSchema),
   getUsers
 );
@@ -35,10 +34,10 @@ router.get("/users/:id", getUser);
 router.patch(
   "/users/:id",
   isLoggedIn,
-  hasRole("admin"),
+  hasRole("admin", "superadmin"),
   validate(patchUserSchema),
   patchUser
 );
-router.delete("/users/:id", isLoggedIn, hasRole("admin"), deleteUser);
+router.delete("/users/:id", isLoggedIn, hasRole("admin", "superadmin"), deleteUser);
 
 module.exports = router;

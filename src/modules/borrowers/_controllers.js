@@ -2,16 +2,23 @@ const express = require("express");
 const addBorrower = require("./add-borrower");
 const listBorrowers = require("./list-borrower");
 const showBorrower = require("./show-borrower");
+const editBorrower = require("./edit-borrower");
+const removeBorrower = require("./remove-borrower");
 
 /**
  *
  * @param {express.Request} req
  * @param {express.Response} res
  */
+
 function postBorrower(req, res) {
-  addBorrower(req.body).then((borrower) => {
-    res.status(201).json({ borrower });
-  });
+  addBorrower(req.body)
+    .then((borrower) => {
+      res.status(201).json({ borrower });
+    })
+    .catch((err) => {
+      console.log("Error creating borrwer", err);
+    });
 }
 
 /**
@@ -43,8 +50,8 @@ function getBorrower(req, res, next) {
 }
 
 /**
- * 
-* @param {express.Request} req
+ *
+ * @param {express.Request} req
  * @param {express.Response} res
  * @param {express.NextFunction} next
  */
@@ -62,10 +69,10 @@ function patchBorrower(req, res, next) {
       next(err);
     });
 }
- 
+
 /**
- * 
-* @param {express.Request} req
+ *
+ * @param {express.Request} req
  * @param {express.Response} res
  * @param {express.NextFunction} next
  */
