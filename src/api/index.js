@@ -21,4 +21,6 @@ router.use(borrowerRoutes);
 router.use(authRoutes);
 router.use(bookCopyRoutes);
 
+router.use(handleErrors);
+
 module.exports = router;

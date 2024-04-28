@@ -5,6 +5,11 @@ const db = require("./db");
 
 const app = express();
 
+process.on("unhandledRejection", (err) => {
+  console.log("UnhandledRejection", err);
+  process.exit(1);
+});
+
 app.use(express.json());
 app.use(apiRoutes);
 
