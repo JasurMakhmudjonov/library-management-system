@@ -11,22 +11,45 @@ const config = require("../config");
  */
 
 function isLoggedIn(req, res, next) {
-  const token = req.headers.authorization
-  if (!token) {
+  // const token = req.headers.authorization
+
+  const { authorization } = req.headers;
+
+  if (!authorization) {
     next(new UnauthorizedError("Unauthorized"));
     return;
   }
 
-  try {
-    const payload = jwt.verify(token, config.jwt.secret, {
-      ignoreExpiration: false,
-    });
+  const [type, token] = authorization.split(" ");
+  switch (type) {
+    case "Bearer":
+      if (!token) {
+        next(new UnauthorizedError("Unauthorized"));
+        return;
+      }
+      try {
+        const payload = jwt.verify(token, config.jwt.secret, {
+          ignoreExpiration: false,
+        });
 
-    req.user = payload.user;
+        req.user = payload.user;
 
-    next();
-  } catch (error) {
+        next();
+      } catch (error) {
+        next(new UnauthorizedError("Unauthorized"));
+      }
+
+      break;
+
+    default: {
+      next(new UnauthorizedError("Unauthorized"));
+      break; 
+    }
+  }
+
+  if (!token) {
     next(new UnauthorizedError("Unauthorized"));
+    return;
   }
 }
 
