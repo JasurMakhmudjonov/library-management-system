@@ -1,4 +1,5 @@
 const express = require("express");
+const cors = require("cors");
 const config = require("./shared/config");
 const apiRoutes = require("./api");
 const db = require("./db");
@@ -9,6 +10,8 @@ process.on("unhandledRejection", (err) => {
   console.log("UnhandledRejection", err);
   process.exit(1);
 });
+
+app.use(cors());
 
 app.use(express.json());
 app.use(apiRoutes);
