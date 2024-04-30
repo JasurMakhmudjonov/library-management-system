@@ -3,38 +3,48 @@
 /** @type {import('sequelize-cli').Migration} */
 module.exports = {
   async up(queryInterface, Sequelize) {
-    await queryInterface.createTable("book_copies", {
+    await queryInterface.createTable("loans", {
       id: {
         type: Sequelize.DataTypes.INTEGER,
         autoIncrement: true,
         primaryKey: true,
       },
-      bookId: {
+      borrowerId: {
         type: Sequelize.DataTypes.INTEGER,
         allowNull: false,
         references: {
-          model: "books",
+          model: "borrowers",
           key: "id",
         },
       },
-      countOfCopies: {
+      bookCopyId: {
         type: Sequelize.DataTypes.INTEGER,
         allowNull: false,
-        defaultValue:0,
-
+        references: {
+          model: "book_copies",
+          key: "id",
+        },
       },
-      createdAt: {
+      dateBorrowed: {
         type: Sequelize.DataTypes.DATE,
-        defaultValue: Sequelize.NOW,
+        allowNull: false,
       },
-      updatedAt: {
+      dateReturned: {
         type: Sequelize.DataTypes.DATE,
-        defaultValue: Sequelize.NOW,
+        allowNull: true,
+      },
+      dueDate: {
+        type: Sequelize.DataTypes.DATE,
+        allowNull: false,
+      },
+      status: {
+        type: Sequelize.DataTypes.ENUM("loaned", "pending", "closed"),
+        defaultValue: "loaned",
       },
     });
   },
 
   async down(queryInterface, Sequelize) {
-    await queryInterface.dropTable("book_copies", { force: true });
+    await queryInterface.dropTable("loans");
   },
 };

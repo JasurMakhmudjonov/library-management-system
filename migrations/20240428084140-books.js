@@ -1,7 +1,5 @@
 "use strict";
 
-const { SELECT } = require("sequelize/lib/query-types");
-
 /** @type {import('sequelize-cli').Migration} */
 module.exports = {
   async up(queryInterface, Sequelize) {
@@ -61,7 +59,6 @@ module.exports = {
         },
       
       },
-
       createdAt: {
         type: Sequelize.DataTypes.DATE,
         defaultValue: Sequelize.NOW,

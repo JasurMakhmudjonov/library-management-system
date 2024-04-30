@@ -8,6 +8,9 @@ const categoryRoutes = require("../modules/categories/_routes");
 const borrowerRoutes = require("../modules/borrowers/_routes");
 const authRoutes = require("../modules/auth/_routes");
 const bookCopyRoutes = require("../modules/book_copies/_routes");
+const loanRoutes = require("../modules/loans/_routes");
+const handleError = require("../shared/errors/handle-errors");
+const handleErrors = require("../shared/errors/handle-errors");
 
 const router = express.Router();
 
@@ -19,6 +22,7 @@ router.use(bookRoutes);
 router.use(categoryRoutes);
 router.use(borrowerRoutes);
 router.use(authRoutes);
+router.use(loanRoutes);
 router.use(bookCopyRoutes);
 
 router.use(handleErrors);

@@ -58,9 +58,7 @@ Book.belongsTo(Publisher, { foreignKey: "publisherId" });
 Category.hasMany(Book, { foreignKey: "categoryId" });
 Book.belongsTo(Category, { foreignKey: "categoryId" });
 
-Book.belongsToMany(Author, { through: "books_authors" });
-Author.belongsToMany(Book, { through: "books_authors" });
+Book.belongsToMany(Author, { through: "books_authors", timestamps: false });
+Author.belongsToMany(Book, { through: "books_authors", timestamps: false });
 
 module.exports = Book;
-
-

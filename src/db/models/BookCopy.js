@@ -10,7 +10,12 @@ const BookCopy = db.define(
       autoIncrement: true,
       primaryKey: true,
     },
+    countOfCopies: {
+      type: DataTypes.INTEGER,
+      allowNUll: false,
+    },
   },
+
   {
     tableName: "book_copies",
     timestamps: true,

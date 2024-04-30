@@ -20,8 +20,8 @@ exports.getUsersSchema = {
   query: Joi.object({
     q: Joi.string().min(1),
     sortBy: Joi.string().valid(
-      "last_name",
-      "fist_name",
+      "firstName",
+      "lastName",
       "createdAt",
       "updatedAt"
     ),

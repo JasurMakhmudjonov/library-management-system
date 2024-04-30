@@ -8,5 +8,7 @@ module.exports = {
   Book: require("./Book"),
   Category: require("./Category"),
   Borrower: require("./Borrower"),
-  BookCopy: require("./BookCopy")
+  BookCopy: require("./BookCopy"),
+  Loan: require("./Loan"),
+
 };
