@@ -10,18 +10,33 @@ function listLoans({
   order = "DESC",
   offset = 0,
   limit = 5,
+  ...filters
 }) {
   return Loan.findAndCountAll({
     where: {
-      dueDate: {
-        [Op.iLike]: `%${q}%`,
-      },
+      ...filters,
     },
     order: [[sortBy, order]],
     offset,
     limit,
     include: [
-      Borrower,
+      {
+        model: Borrower,
+        where: {
+          [Op.or]: [
+            {
+              firstName: {
+                [Op.iLike]: `%${q}%`,
+              },
+            },
+            {
+              lastName: {
+                [Op.iLike]: `%${q}%`,
+              },
+            },
+          ],
+        },
+      },
       {
         model: BookCopy,
         include: {

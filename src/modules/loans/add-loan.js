@@ -18,7 +18,7 @@ function addLoan(data) {
         throw new BadRequestError("Borrower is not found");
       }
 
-      if (!borrowerBlocked) {
+      if (borrowerBlocked) {
         throw new BadRequestError("Borrower is blocked");
       }
 
@@ -26,7 +26,7 @@ function addLoan(data) {
         throw new BadRequestError("BookCopy is not found");
       }
 
-      if (!bookCopyInaccessible) {
+      if (bookCopyInaccessible) {
         throw new BadRequestError("BookCopy is inaccessible");
       }
 
