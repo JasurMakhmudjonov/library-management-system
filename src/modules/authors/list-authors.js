@@ -6,7 +6,7 @@ function listAuthors({
   sortBy = "createdAt",
   order = "DESC",
   offset = 0,
-  limit = 5,
+  limit = 20,
 }) {
   return Author.findAndCountAll({
     where: {

@@ -38,7 +38,7 @@ function getAuthors(req, res) {
  */
 
 function getAuthor(req, res, next) {
-  ShowAuthor(req.params.id)
+  return ShowAuthor(req.params.id)
     .then((author) => {
       if (!author) {
         res.status(404).json({ error: "Author not found" });
